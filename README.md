@@ -9,11 +9,14 @@ https://github.com/VIKINGYFY/immortalwrt.git
 
 # 固件简要说明：
 
-固件每天早上4点自动编译。
-
-固件信息里的时间为编译开始的时间，方便核对上游源码提交时间。
-
-MEDIATEK系列、QUALCOMMAX系列、ROCKCHIP系列、X86系列。
+这是个平台固件包，仅供个人使用，只支持x86-64！
+请注意选择你需要的设备固件！
+50M左右只包含：
+HomeProxy
+MosDNS
+Tailscale
+DDNS-Go
+需要其他请自行修改配置文件编译。
 
 # 目录简要说明：
 
