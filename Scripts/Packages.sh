@@ -1,4 +1,30 @@
 #!/bin/bash
+# 确保 wget 和 jq 已安装
+command -v wget >/dev/null 2>&1 || { echo "wget 未安装，安装后重试"; exit 1; }
+command -v jq >/dev/null 2>&1 || { echo "jq 未安装，安装后重试"; exit 1; }
+
+# 检查当前 Go 版本
+current_version=$(go version 2>/dev/null)
+
+if [[ $current_version ]]; then
+    echo "当前 Go 版本: $current_version"
+    # 删除现有版本
+    sudo rm -rf /usr/local/go
+    echo "已删除当前 Go 版本"
+else
+    echo "Go 目前未安装"
+fi
+
+# 下载并安装新版本
+echo "正在下载 Go 1.23.2..."
+wget https://dl.google.com/go/go1.23.2.linux-arm64.tar.gz || { echo "下载失败"; exit 1; }
+sudo tar -C /usr/local -xzf go1.23.2.linux-arm64.tar.gz || { echo "安装失败"; exit 1; }
+rm go1.23.2.linux-arm64.tar.gz  # 清理临时文件
+
+# 输出安装后的版本
+echo "安装后的 Go 版本:"
+/usr/local/go/bin/go version
+
 
 #安装和更新软件包
 UPDATE_PACKAGE() {
