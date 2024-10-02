@@ -93,6 +93,13 @@ jobs:
           sudo -E systemctl daemon-reload
           sudo -E timedatectl set-timezone "Asia/Shanghai"
 
+      - name: Install Go 1.22
+        run: |
+          sudo rm -rf /usr/local/go
+          wget https://go.dev/dl/go1.23.2.linux-arm64.tar.gz
+          sudo tar -C /usr/local -xzf go1.23.2.linux-arm64.tar.gz
+          echo "export PATH=$PATH:/usr/local/go/bin" >> $GITHUB_ENV
+
       - name: Initialization Values
         run: |
           export WRT_DATE=$(TZ=UTC-8 date +"%y.%m.%d_%H.%M.%S")
@@ -104,16 +111,6 @@ jobs:
           echo "WRT_CI=$WRT_CI" >> $GITHUB_ENV
           echo "WRT_VER=$WRT_VER" >> $GITHUB_ENV
           echo "WRT_TYPE=$WRT_TYPE" >> $GITHUB_ENV
-
-      - name: Install Go 1.23.2
-        run: |
-          sudo rm -rf /usr/local/go
-          wget https://go.dev/dl/go1.23.2.linux-amd64.tar.gz
-          sudo tar -C /usr/local -xzf go1.23.2.linux-amd64.tar.gz
-          echo "export PATH=/usr/local/go/bin:$PATH" >> $GITHUB_ENV
-          echo "export PATH=/usr/local/go/bin:$PATH" >> ~/.bashrc
-          source ~/.bashrc
-          /usr/local/go/bin/go version
         
       - name: Clone Code
         run: |
