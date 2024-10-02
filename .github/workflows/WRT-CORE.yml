@@ -105,16 +105,14 @@ jobs:
           echo "WRT_VER=$WRT_VER" >> $GITHUB_ENV
           echo "WRT_TYPE=$WRT_TYPE" >> $GITHUB_ENV
 
-      - name: Install Go 1.22
+      - name: Install Go 1.23.2
         run: |
-          # 删除可能存在的旧版本 Go
           sudo rm -rf /usr/local/go
-          # 下载并安装 Go 1.22
           wget https://go.dev/dl/go1.23.2.linux-amd64.tar.gz
           sudo tar -C /usr/local -xzf go1.23.2.linux-amd64.tar.gz
-          # 设置 Go 的路径到环境变量
           echo "export PATH=/usr/local/go/bin:$PATH" >> $GITHUB_ENV
-          # 验证 Go 版本
+          echo "export PATH=/usr/local/go/bin:$PATH" >> ~/.bashrc
+          source ~/.bashrc
           /usr/local/go/bin/go version
         
       - name: Clone Code
