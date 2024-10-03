@@ -93,27 +93,13 @@ jobs:
           sudo -E systemctl daemon-reload
           sudo -E timedatectl set-timezone "Asia/Shanghai"
 
-      - name: Check and Update Go Version
+      - name: Clean and clone golang packages
         run: |
-          echo "Checking current Go version..."
-          go version || echo "Go is not installed."
-            
-          REQUIRED_GO_VERSION="1.22"
-          CURRENT_GO_VERSION=$(go version 2>/dev/null | grep -oP 'go\K[\d.]+')
-            
-          if [ -z "$CURRENT_GO_VERSION" ] || [ "$(printf '%s\n' "$REQUIRED_GO_VERSION" "$CURRENT_GO_VERSION" | sort -V | head -n1)" != "$REQUIRED_GO_VERSION" ]; then
-            echo "Updating Go to version $REQUIRED_GO_VERSION manually..."
-            wget https://golang.org/dl/go$REQUIRED_GO_VERSION.linux-amd64.tar.gz
-            sudo rm -rf /usr/local/go
-            sudo tar -C /usr/local -xzf go$REQUIRED_GO_VERSION.linux-amd64.tar.gz
-            sudo ln -sf /usr/local/go/bin/go /usr/bin/go
-          else
-             echo "Go is already at the required version or newer."
-          fi
-            
-          echo "Updated Go version:"
-          go version
-                
+          rm -rf feeds/packages/lang/golang
+          git clone https://github.com/sbwml/packages_lang_golang -b 23.x feeds/packages/lang/golang
+        
+        
+
       - name: Initialization Values
         run: |
           export WRT_DATE=$(TZ=UTC-8 date +"%y.%m.%d_%H.%M.%S")
