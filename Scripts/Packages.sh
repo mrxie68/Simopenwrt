@@ -21,33 +21,10 @@ UPDATE_PACKAGE() {
 }
 
 
-# 确保在 OpenWRT 目录下
-echo "确保您位于 OpenWRT 目录下..."
-
-# 替换 golang 包，使用 1.22.x 或更新版本
-echo "替换 golang 包，使用 1.22.x 或更新版本..."
-rm -rf feeds/packages/lang/golang
-git clone https://github.com/sbwml/packages_lang_golang -b 23.x feeds/packages/lang/golang
-
-# 删除 feeds 中的 v2ray-geodata 包（适用于 openwrt-22.03 和 master 分支）
-echo "删除 feeds 中的 v2ray-geodata 包..."
-rm -rf feeds/packages/net/v2ray-geodata
-
-# 克隆 mosdns 和 v2ray-geodata 包
-echo "克隆 luci-app-mosdns 和 v2ray-geodata 包..."
-git clone https://github.com/sbwml/luci-app-mosdns -b v5 package/mosdns
-git clone https://github.com/sbwml/v2ray-geodata package/v2ray-geodata
-
-# 进入菜单选择 mosdns 选项
-echo "启动 make menuconfig 进行包选择..."
-make menuconfig # 选择 LUCI -> Applications -> luci-app-mosdns
-
-# 编译 mosdns 包
-echo "编译 luci-app-mosdns 包..."
-make package/mosdns/luci-app-mosdns/compile V=s
-
-
 #UPDATE_PACKAGE "包名" "项目地址" "项目分支" "pkg/name，可选，pkg为从大杂烩中单独提取包名插件；name为重命名为包名"
+
+
+
 UPDATE_PACKAGE "argon" "jerrykuku/luci-theme-argon" "master"
 UPDATE_PACKAGE "kucat" "sirpdboy/luci-theme-kucat" "js"
 
@@ -57,6 +34,12 @@ UPDATE_PACKAGE "nekoclash" "Thaolga/luci-app-nekoclash" "main"
 UPDATE_PACKAGE "openclash" "vernesong/OpenClash" "dev" "pkg"
 UPDATE_PACKAGE "passwall" "xiaorouji/openwrt-passwall" "main" "pkg"
 UPDATE_PACKAGE "ssr-plus" "fw876/helloworld" "master"
+
+
+find ./ | grep Makefile | grep v2ray-geodata | xargs rm -f
+find ./ | grep Makefile | grep mosdns | xargs rm -f
+UPDATE_PACKAGE "mosdns" "sbwml/luci-app-mosdns" "v5"
+UPDATE_PACKAGE "v2ray-geodata" "sbwml/v2ray-geodata" "master"
 
 UPDATE_PACKAGE "luci-app-advancedplus" "VIKINGYFY/luci-app-advancedplus" "main"
 UPDATE_PACKAGE "luci-app-gecoosac" "lwb1978/openwrt-gecoosac" "main"
