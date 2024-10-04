@@ -32,8 +32,8 @@ jobs:
       fail-fast: false
       matrix:
         TARGET: [IPQ60XX-WIFI-YES, IPQ60XX-WIFI-NO]
-        BRANCH: ['v23.05.4', 'master']  # 两个不同的分支
-        SOURCE: [immortalwrt/immortalwrt]
+        BRANCH: ['main']  # 两个不同的分支
+        SOURCE: [VIKINGYFY/immortalwrt]
 
     #调用公用编译核心WRT-CORE.yml
     uses: ./.github/workflows/WRT-CORE.yml
