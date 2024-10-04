@@ -31,7 +31,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        TARGET: [IPQ60XX-WIFI-YES, IPQ60XX-WIFI-NO]
+        TARGET: [IPQ60XX-WIFI-YES]
         BRANCH: ['main']  # 两个不同的分支
         SOURCE: [VIKINGYFY/immortalwrt]
 
