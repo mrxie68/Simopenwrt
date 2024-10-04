@@ -152,7 +152,7 @@ jobs:
           ./scripts/feeds update -a
           ./scripts/feeds install -a
 
-      - name: Custom Packages
+      - name: new +luci
         run: |
           cd ./wrt/
 
