@@ -230,12 +230,7 @@ jobs:
           tag_name: ${{env.WRT_TARGET}}_${{env.WRT_VER}}_${{env.WRT_DATE}}
           files: ./wrt/upload/*.*
           body: |
-            请注意选择你需要的设备固件！
-            只包含：
-            HomeProxy
-            MosDNS
-            Tailscale
-            DDNS-Go
+            请注意选择你需要的设备固件！支持x86-64和京东云ax1800，刷机有风险请谨慎操作。只包含：HomeProxy/MosDNS/Tailscale/DDNS-Go
             需要其他请自行修改配置文件编译。
 
             源码：${{env.WRT_REPO}}
