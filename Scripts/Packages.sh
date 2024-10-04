@@ -22,13 +22,6 @@ UPDATE_PACKAGE() {
 
 
 #UPDATE_PACKAGE "包名" "项目地址" "项目分支" "pkg/name，可选，pkg为从大杂烩中单独提取包名插件；name为重命名为包名"
-
-cd /home/runner/work/Simopenwrt/Simopenwrt/wrt
-
-rm -rf feeds/packages/lang/golang
-git clone https://github.com/sbwml/packages_lang_golang -b 23.x feeds/packages/lang/golang
-
-rm -rf feeds/packages/net/v2ray-geodata
 UPDATE_PACKAGE "mosdns" "sbwml/luci-app-mosdns" "v5"
 UPDATE_PACKAGE "v2ray-geodata" "sbwml/v2ray-geodata" "master"
 

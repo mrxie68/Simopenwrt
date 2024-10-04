@@ -154,6 +154,12 @@ jobs:
 
       - name: Custom Packages
         run: |
+          cd ./wrt/
+
+          $GITHUB_WORKSPACE/Scripts/mosdns.sh
+
+      - name: Custom Packages
+        run: |
           cd ./wrt/package/
 
           $GITHUB_WORKSPACE/Scripts/Packages.sh
