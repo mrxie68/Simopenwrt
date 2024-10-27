@@ -4,6 +4,10 @@ git clone https://github.com/sbwml/packages_lang_golang -b 23.x feeds/packages/l
 
 rm -rf feeds/packages/net/tailscale
 git clone https://github.com/tailscale/tailscale.git feeds/packages/net/tailscale
+go install tailscale.com/cmd/tailscale{,d}
+./build_dist.sh tailscale.com/cmd/tailscale
+./build_dist.sh tailscale.com/cmd/tailscaled
+
 
 if [[ $WRT_TARGET == *"IPQ"* ]]; then
 echo >> feeds.conf.default
