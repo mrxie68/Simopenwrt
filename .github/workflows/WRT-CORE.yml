@@ -144,11 +144,6 @@ jobs:
 
             echo "caches cleanup done!"
           fi
-      - name: new +luci
-        run: |
-          cd ./wrt/
-  
-          $GITHUB_WORKSPACE/Scripts/mosdns.sh
 
       - name: Update Feeds
         run: |
@@ -157,6 +152,12 @@ jobs:
           ./scripts/feeds update -a
           ./scripts/feeds install -a
 
+      - name: new +luci
+        run: |
+          cd ./wrt/
+    
+          $GITHUB_WORKSPACE/Scripts/mosdns.sh    
+                
       - name: Custom Packages
         run: |
           cd ./wrt/package/
