@@ -74,10 +74,11 @@ if [ -f "$SP_FILE" ]; then
 fi
 
 
-#修复freeswitch依赖缺失
-FW_FILE=$(find ../feeds/telephony/ -maxdepth 3 -type f -wholename "*/freeswitch/Makefile")
-if [ -f "$FW_FILE" ]; then
-	sed -i "s/libpcre/libpcre2/g" $FW_FILE
+#修复TailScale配置文件冲突
+FW_FILE=$(find ../feeds/telephony/ -maxdepth 3 -type f -wholename "*/freeswitch/Makefile")	TS_FILE=$(find ../feeds/packages/ -maxdepth 3 -type f -wholename "*/tailscale/Makefile")
+if [ -f "$FW_FILE" ]; then	if [ -f "$TS_FILE" ]; then
+	sed -i "s/libpcre/libpcre2/g" $FW_FILE		sed -i '/\/files/d' $TS_FILE
 
-	cd $PKG_PATCH && echo "freeswitch has been fixed!"
-fi
+
+	cd $PKG_PATCH && echo "freeswitch has been fixed!"		cd $PKG_PATCH && echo "tailscale has been fixed!"
+fi	fi
